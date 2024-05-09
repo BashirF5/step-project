@@ -1,14 +1,16 @@
 package az.edu.turing.step_project.controller;
 
-import az.edu.turing.StepProject.dao.BookingDto;
-import az.edu.turing.StepProject.dao.iml.BookingEntity;
-import az.edu.turing.StepProject.service.BookingService;
-import az.edu.turing.StepProject.exception.BookingException;
+
+import az.edu.turing.step_project.dao.BookingDto;
+import az.edu.turing.step_project.dao.iml.BookingEntity;
+import az.edu.turing.step_project.exception.BookingException;
+import az.edu.turing.step_project.service.BookingService;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class BookingController {
     private final BookingService bookingService;
@@ -17,14 +19,6 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    public BookingDto checkBooking(BookingDto bookingDto) throws IOException {
-        final Long bookingId = bookingDto.bookingId;
-        if (bookingId == null && bookingId != 6) {
-            throw new RuntimeException("Not valid BookingId,please check again! -->" + bookingDto);
-        }
-        return bookingService.createBooking(bookingDto);
-
-    }
 
     public BookingDto getBookingPasserName(BookingDto bookingDto) {
         try {
@@ -43,11 +37,19 @@ public class BookingController {
     }
 
     public BookingDto createBooking(BookingDto bookingDto) throws IOException {
+        final Long bookingId = bookingDto.bookingId;
+        if (bookingId == null && bookingId != 6) {
+            throw new RuntimeException("Not valid BookingId,please check again! -->" + bookingDto);
+        }
         if (bookingDto.CreadationDate.isBefore(LocalDate.now())){
             throw  new BookingException("Creating a book cannot be past!");
         }
         return bookingService.createBooking(bookingDto);
 
     }
+    public List<BookingEntity> getAllBookings() throws IOException {
+        return bookingService.getAllBookings();
+    }
+
 
 }

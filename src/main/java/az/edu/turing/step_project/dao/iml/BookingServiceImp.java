@@ -6,6 +6,7 @@ import az.edu.turing.step_project.exception.BookingException;
 import az.edu.turing.step_project.service.BookingService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -40,14 +41,8 @@ public class BookingServiceImp implements BookingService {
     }
 
     @Override
-    public List<BookingEntity> getAllBookings(BookingEntity entity) throws IOException {
-
-        BookingEntity newBooking = new BookingEntity(entity.getPassengerName(),entity.getBookingId(),entity.getBookingId(), entity.getNUM_TICKERS(),entity.getCreadationDate());
-        daoBooking.saveBooking((Collection<BookingEntity>) newBooking);
-        List<BookingEntity> allBookings = (List<BookingEntity>) daoBooking.getAllBookings();
-        allBookings.add(newBooking);
-
-        return allBookings;
+    public List<BookingEntity> getAllBookings() throws IOException {
+        return daoBooking.getAllBookings();
     }
 
 

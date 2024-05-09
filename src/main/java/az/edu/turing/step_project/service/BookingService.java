@@ -13,6 +13,6 @@ public interface  BookingService {
 
     public BookingDto createBooking(BookingDto bookingDto) throws IOException;
     public Optional<BookingEntity> getDetailsBooking(BookingDto bookingDto);
-    public List<BookingEntity> getAllBookings(BookingEntity entity) throws IOException;
+    public List<BookingEntity> getAllBookings() throws IOException;
 
 }
