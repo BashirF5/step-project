@@ -11,11 +11,12 @@ import java.util.Optional;
 
 public interface BookingDAO<T> {
     boolean saveBooking(Collection<T> t) throws IOException;
-    Optional<T> getBookingById(Long bookingId);
+    Optional<T> getBookingById(Long bookingId) throws IOException;
     public List<BookingEntity> getAllBookings() throws IOException;
-    Optional<T>getBookingsByPassengerName(String name);
-    Optional<T> getBookingsById(Long bookId);
+    Optional<T>getBookingsByPassengerName(String name) throws IOException;
+
     Optional<T>cancelBooking(String bookingId);
+
 
 
     }

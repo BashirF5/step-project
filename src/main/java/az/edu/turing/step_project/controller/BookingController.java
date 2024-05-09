@@ -8,9 +8,7 @@ import az.edu.turing.step_project.service.BookingService;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class BookingController {
     private final BookingService bookingService;
@@ -36,6 +34,7 @@ public class BookingController {
         }
     }
 
+
     public BookingDto createBooking(BookingDto bookingDto) throws IOException {
         final Long bookingId = bookingDto.bookingId;
         if (bookingId == null && bookingId != 6) {
@@ -50,6 +49,26 @@ public class BookingController {
     public List<BookingEntity> getAllBookings() throws IOException {
         return bookingService.getAllBookings();
     }
+    public Optional<BookingEntity> getBookingById(Long bookingId) throws IOException {
+        if (bookingService != null) {
+            return bookingService.getBookingById(bookingId);
+        } else {
+            throw new BookingException("Booking service is not available");
+        }
+    }
+    public Optional<BookingEntity> getBookingsByPassengerName(String name) throws IOException {
 
-
+       Optional<BookingEntity> bookings = bookingService.getBookingsByPassengerName(name);
+    if (name==name.toLowerCase().toUpperCase(Locale.ROOT)){
+        if (bookings.isPresent()){
+            return bookings;
+        }
+        else {
+            throw new BookingException("Name is not found");
+        }
+    }
+        return bookings;
+    }
 }
+
+
