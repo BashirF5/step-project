@@ -17,5 +17,7 @@ public interface BookingService {
 
     public Optional<BookingEntity> getBookingById(Long bookingId) throws IOException;
     Optional<BookingEntity>getBookingsByPassengerName(String name) throws IOException;
+    Optional<BookingEntity>cancelBookingById(Long bookingId) throws IOException;
+    Optional<BookingEntity>cancelBookingByName(String bookingName) throws IOException;
 
 }

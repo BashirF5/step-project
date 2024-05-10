@@ -59,4 +59,15 @@ public class BookingEntity implements Serializable {
     public void setCreadationDate(LocalDate creadationDate) {
         CreadationDate = creadationDate;
     }
+
+    @Override
+    public String toString() {
+        return "BookingEntity{" +
+                "passengerName='" + passengerName + '\'' +
+                ", bookingId=" + bookingId +
+                ", flightId=" + flightId +
+                ", NUM_TICKERS=" + NUM_TICKERS +
+                ", CreadationDate=" + CreadationDate +
+                '}';
+    }
 }

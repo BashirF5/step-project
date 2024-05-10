@@ -15,7 +15,8 @@ public interface BookingDAO<T> {
     public List<BookingEntity> getAllBookings() throws IOException;
     Optional<T>getBookingsByPassengerName(String name) throws IOException;
 
-    Optional<T>cancelBooking(String bookingId);
+    Optional<T>cancelBookingById(Long bookingId) throws IOException;
+    Optional<T>cancelBookingByName(String bookingName) throws IOException;
 
 
 

@@ -40,15 +40,17 @@ public class BookingController {
         if (bookingId == null && bookingId != 6) {
             throw new RuntimeException("Not valid BookingId,please check again! -->" + bookingDto);
         }
-        if (bookingDto.CreadationDate.isBefore(LocalDate.now())){
-            throw  new BookingException("Creating a book cannot be past!");
+        if (bookingDto.CreadationDate.isBefore(LocalDate.now())) {
+            throw new BookingException("Creating a book cannot be past!");
         }
         return bookingService.createBooking(bookingDto);
 
     }
+
     public List<BookingEntity> getAllBookings() throws IOException {
         return bookingService.getAllBookings();
     }
+
     public Optional<BookingEntity> getBookingById(Long bookingId) throws IOException {
         if (bookingService != null) {
             return bookingService.getBookingById(bookingId);
@@ -56,19 +58,42 @@ public class BookingController {
             throw new BookingException("Booking service is not available");
         }
     }
+
     public Optional<BookingEntity> getBookingsByPassengerName(String name) throws IOException {
 
-       Optional<BookingEntity> bookings = bookingService.getBookingsByPassengerName(name);
-    if (name==name.toLowerCase().toUpperCase(Locale.ROOT)){
-        if (bookings.isPresent()){
-            return bookings;
+        Optional<BookingEntity> bookings = bookingService.getBookingsByPassengerName(name);
+        if (name == name.toLowerCase().toUpperCase(Locale.ROOT)) {
+            if (bookings.isPresent()) {
+                return bookings;
+            } else {
+                throw new BookingException("Name is not found");
+            }
         }
-        else {
-            throw new BookingException("Name is not found");
-        }
-    }
         return bookings;
     }
+
+    public Optional<BookingEntity> cancelBookingById(Long bookingId) throws IOException {
+        Optional<BookingEntity> cancelBooking = bookingService.cancelBookingById(bookingId);
+        if (bookingId > 0) {
+            if (cancelBooking.isPresent()) {
+                return cancelBooking;
+            } else {
+                return Optional.empty();
+            }
+        } else {
+            throw new BookingException("BookingId cannot be negative");
+        }
+    }
+
+    public Optional<BookingEntity> cancelBookingByName(String bookingName) throws IOException {
+        Optional<BookingEntity> cancelBooking = bookingService.cancelBookingByName(bookingName);
+        if (cancelBooking.isPresent()) {
+            return cancelBooking;
+        } else {
+            return Optional.empty();
+        }
+    }
+
 }
 
 
