@@ -5,29 +5,22 @@ import java.time.LocalDate;
 
 public class BookingEntity implements Serializable {
 
-    private  static final Long serialUID=1L;
+    private static final Long serialUID = 1L;
     private String passengerName;
     private Long bookingId;
     private Long flightId;
-    private Long NUM_TICKERS;
-    private LocalDate CreadationDate;
+    private LocalDate creadationDate;
 
     public BookingEntity() {
     }
 
-    public BookingEntity(String passengerName, Long bookingId, Long flightId, Long NUM_TICKERS, LocalDate creadationDate) {
+    public BookingEntity(String passengerName, Long bookingId, Long flightId, LocalDate creadationDate) {
         this.passengerName = passengerName;
         this.bookingId = bookingId;
         this.flightId = flightId;
-        this.NUM_TICKERS = NUM_TICKERS;
-        CreadationDate = creadationDate;
+        this.creadationDate=creadationDate;
     }
-    public BookingEntity(String passengerName, Long bookingId, Long flightId) {
-        this.passengerName = passengerName;
-        this.bookingId = bookingId;
-        this.flightId = flightId;
 
-    }
 
     public String getPassengerName() {
         return passengerName;
@@ -53,20 +46,12 @@ public class BookingEntity implements Serializable {
         this.flightId = flightId;
     }
 
-    public Long getNUM_TICKERS() {
-        return NUM_TICKERS;
-    }
-
-    public void setNUM_TICKERS(Long NUM_TICKERS) {
-        this.NUM_TICKERS = NUM_TICKERS;
-    }
-
     public LocalDate getCreadationDate() {
-        return CreadationDate;
+        return creadationDate;
     }
 
     public void setCreadationDate(LocalDate creadationDate) {
-        CreadationDate = creadationDate;
+        this.creadationDate = creadationDate;
     }
 
     @Override
@@ -75,9 +60,7 @@ public class BookingEntity implements Serializable {
                 "passengerName='" + passengerName + '\'' +
                 ", bookingId=" + bookingId +
                 ", flightId=" + flightId +
-                ", NUM_TICKERS=" + NUM_TICKERS +
-                ", CreadationDate=" + CreadationDate +
+                ", creadationDate=" + creadationDate +
                 '}';
     }
-
 }
