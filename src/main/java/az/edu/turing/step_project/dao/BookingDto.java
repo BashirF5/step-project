@@ -16,4 +16,15 @@ public class BookingDto {
         this.NUM_TICKERS = NUM_TICKERS;
         CreadationDate = creadationDate;
     }
+
+    @Override
+    public String toString() {
+        return "BookingDto{" +
+                "passengerName='" + passengerName + '\'' +
+                ", bookingId=" + bookingId +
+                ", flightId=" + flightId +
+                ", NUM_TICKERS=" + NUM_TICKERS +
+                ", CreadationDate=" + CreadationDate +
+                '}';
+    }
 }

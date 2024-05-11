@@ -7,8 +7,7 @@ import az.edu.turing.step_project.exception.BookingException;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 public class BookingController {
     private final BookingService bookingService;
@@ -17,14 +16,6 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    public BookingDto checkBooking(BookingDto bookingDto) throws IOException {
-        final Long bookingId = bookingDto.bookingId;
-        if (bookingId == null && bookingId != 6) {
-            throw new RuntimeException("Not valid BookingId,please check again! -->" + bookingDto);
-        }
-        return bookingService.createBooking(bookingDto);
-
-    }
 
     public BookingDto getBookingPasserName(BookingDto bookingDto) {
         try {
@@ -42,12 +33,67 @@ public class BookingController {
         }
     }
 
+
+
     public BookingDto createBooking(BookingDto bookingDto) throws IOException {
-        if (bookingDto.CreadationDate.isBefore(LocalDate.now())){
-            throw  new BookingException("Creating a book cannot be past!");
+        if (bookingDto.bookingId == null || bookingDto.bookingId < 1) {
+            throw new BookingException("Invalid booking ID. Please provide a positive value.");
+        }
+        if (bookingDto.CreadationDate.isBefore(LocalDate.now())) {
+            throw new BookingException("Creation date cannot be in the past.");
         }
         return bookingService.createBooking(bookingDto);
+    }
 
+    public List<BookingEntity> getAllBookings() throws IOException {
+        return bookingService.getAllBookings();
+    }
+
+    public Optional<BookingEntity> getBookingById(Long bookingId) throws IOException {
+        if (bookingService != null) {
+            return bookingService.getBookingById(bookingId);
+        } else {
+            throw new BookingException("Booking service is not available");
+        }
+    }
+
+    public Optional<BookingEntity> getBookingsByPassengerName(String name) throws IOException {
+
+        Optional<BookingEntity> bookings = bookingService.getBookingsByPassengerName(name);
+        if (name == name.toLowerCase().toUpperCase(Locale.ROOT)) {
+            if (bookings.isPresent()) {
+                return bookings;
+            } else {
+                throw new BookingException("Name is not found");
+            }
+        }
+        return bookings;
+    }
+
+    public boolean cancelBookingById(Long bookingId) throws IOException {
+        if (bookingId > 0) {
+            if (bookingService.cancelBookingById(bookingId)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            throw new BookingException("BookingId cannot be negative");
+        }
+    }
+
+    public Optional<BookingEntity> cancelBookingByName(String bookingName) throws IOException {
+        Optional<BookingEntity> cancelBooking = bookingService.cancelBookingByName(bookingName);
+        if (cancelBooking.isPresent()) {
+            return cancelBooking;
+        } else {
+            return Optional.empty();
+        }
+    }
+    public void saveAllToFile(BookingDto bookingDto){
+        bookingService.saveAllToFile(bookingDto);
     }
 
 }
+
+
