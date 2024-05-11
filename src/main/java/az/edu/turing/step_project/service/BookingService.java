@@ -1,7 +1,7 @@
 package az.edu.turing.step_project.service;
 
-import az.edu.turing.step_project.dao.BookingDto;
-import az.edu.turing.step_project.dao.iml.BookingEntity;
+import az.edu.turing.step_project.model.dto.BookingDto;
+import az.edu.turing.step_project.model.entities.BookingEntity;
 
 import java.io.IOException;
 import java.util.Collection;

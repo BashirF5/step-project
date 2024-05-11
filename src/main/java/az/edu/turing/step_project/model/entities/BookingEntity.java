@@ -1,4 +1,4 @@
-package az.edu.turing.step_project.dao.iml;
+package az.edu.turing.step_project.model.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;

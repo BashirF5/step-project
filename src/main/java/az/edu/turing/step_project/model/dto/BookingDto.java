@@ -1,4 +1,4 @@
-package az.edu.turing.step_project.dao;
+package az.edu.turing.step_project.model.dto;
 
 import java.time.LocalDate;
 
