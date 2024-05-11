@@ -12,17 +12,45 @@ public class BookingDaoImpl implements BookingDAO<BookingEntity> {
     //  private static final String FILE_PATH_RESOURCES = FILE_PATH.concat("bookingInfo.txt");
     private static final File file = new File(FILE_PATH_RESOURCES);
     private static ObjectMapper mapper;
-    private static  ArrayList<BookingEntity> BOOKING_ENTITIES = new ArrayList<>();
+    private static ArrayList<BookingEntity> BOOKING_ENTITIES = new ArrayList<>();
 
     public BookingDaoImpl(ObjectMapper objectMapper) {
         this.mapper = objectMapper;
     }
 
 
+    //    public void saveAllToFile(BookingEntity bookingEntity) {
+//        BOOKING_ENTITIES.add(bookingEntity);
+//        try {
+//            FileWriter fileWriter = new FileWriter(FILE_PATH_RESOURCES,true);
+//            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//            mapper.writeValue(bufferedWriter, BOOKING_ENTITIES);
+//            bufferedWriter.close();
+//        } catch (Exception e) {
+//            System.out.println("There is a problem");
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public boolean saveBooking(Collection<BookingEntity> bookings) throws IOException {
+//        BOOKING_ENTITIES.addAll(bookings);
+//        try {
+//            FileWriter fileWriter = new FileWriter(FILE_PATH_RESOURCES,true);
+//            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//            mapper.writeValue(bufferedWriter, BOOKING_ENTITIES);
+//            bufferedWriter.close();
+//            return true;
+//        } catch (Exception e) {
+//            System.out.println("There is a problem");
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
+//
     public void saveAllToFile(BookingEntity bookingEntity) {
         BOOKING_ENTITIES.add(bookingEntity);
         try {
-            FileWriter fileWriter = new FileWriter(FILE_PATH_RESOURCES,true);
+            FileWriter fileWriter = new FileWriter(FILE_PATH_RESOURCES, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             mapper.writeValue(bufferedWriter, BOOKING_ENTITIES);
             bufferedWriter.close();
@@ -34,7 +62,7 @@ public class BookingDaoImpl implements BookingDAO<BookingEntity> {
 
     public boolean saveBooking(Collection<BookingEntity> bookings) throws IOException {
         try {
-            FileWriter fileWriter = new FileWriter(FILE_PATH_RESOURCES,true);
+            FileWriter fileWriter = new FileWriter(FILE_PATH_RESOURCES, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             mapper.writeValue(bufferedWriter, bookings);
             bufferedWriter.close();
@@ -57,23 +85,21 @@ public class BookingDaoImpl implements BookingDAO<BookingEntity> {
 
     @Override
     public List<BookingEntity> getAllBookings() throws IOException {
-      //  BOOKING_ENTITIES.clear();
-       // File bookingFile = file;
 
-            try (FileReader fileReader = new FileReader(FILE_PATH_RESOURCES);
-                 BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-                BookingEntity[] bookings = mapper.readValue(bufferedReader, BookingEntity[].class);
-                BOOKING_ENTITIES.addAll(Arrays.asList(bookings));
-            }
+        try (FileReader fileReader = new FileReader(FILE_PATH_RESOURCES);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            BookingEntity[] bookings = mapper.readValue(bufferedReader, BookingEntity[].class);
+            BOOKING_ENTITIES.addAll(Arrays.asList(bookings));
+        }
 
         return BOOKING_ENTITIES;
     }
 
     @Override
-    public Optional<BookingEntity> getBookingsByPassengerName(String name) throws IOException {
+    public Optional<BookingEntity> getBookingsByFlightId(Long flightId) throws IOException {
         List<BookingEntity> allBookings = getAllBookings();
         return allBookings.stream()
-                .filter(booking -> booking.getPassengerName().equalsIgnoreCase(name))
+                .filter(booking -> booking.getFlightId().equals(flightId))
                 .findFirst();
     }
 
@@ -93,17 +119,4 @@ public class BookingDaoImpl implements BookingDAO<BookingEntity> {
         return false;
     }
 
-    @Override
-    public Optional<BookingEntity> cancelBookingByName(String bookingName) throws IOException {
-        List<BookingEntity> allBookings = getAllBookings();
-        Optional<BookingEntity> bookingToDelete = allBookings.stream()
-                .filter(booking -> booking.getPassengerName().equalsIgnoreCase(bookingName))
-                .findFirst();
-
-        if (bookingToDelete.isPresent()) {
-            allBookings.remove(bookingToDelete.get());
-            saveBooking(allBookings);
-        }
-        return bookingToDelete;
-    }
 }

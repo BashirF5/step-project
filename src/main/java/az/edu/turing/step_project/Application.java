@@ -1,4 +1,4 @@
-
+//
 //package az.edu.turing.step_project;
 //
 //import az.edu.turing.step_project.controller.BookingController;
@@ -16,46 +16,37 @@
 ////import static az.edu.turing.step_project.dao.iml.BookingDaoImpl.BOOKING_ENTITIES;
 //
 //public class Application {
+//
 //    public static void main(String[] args) throws IOException {
 //        BookingDaoImpl bookingDaoImpl =new BookingDaoImpl(new ObjectMapper().registerModule(new JavaTimeModule()));
 //        BookingServiceImp bookingServiceImp=new BookingServiceImp(bookingDaoImpl);
 //        BookingController bookingController=new BookingController(bookingServiceImp);
-////        BookingEntity bookingDto2 = new BookingEntity("Aydan", 11L, 1L, 123L, LocalDate.now());
-////        BookingEntity bookingDto3 = new BookingEntity("Aydan", 11L, 1L, 123L, LocalDate.now());
-////        BookingEntity bookingDto4 = new BookingEntity("Aydan", 11L, 1L, 123L, LocalDate.now());
-////        BookingEntity bookingDto5 = new BookingEntity("Aydan", 11L, 1L, 123L, LocalDate.now());
-////
+////        BookingDto bookingDto=new BookingDto("A",87L,9L,LocalDate.now());
+////       bookingController.createBooking(bookingDto);
+//        BookingDto bookingDto1=new BookingDto("A",88L,99L,LocalDate.of(2024,6,4));
+//        bookingController.createBooking(bookingDto1);
+//     BookingDto bookingDto2=new BookingDto("A",89L,49L,LocalDate.now());
+//      bookingController.createBooking(bookingDto2);
 //
-////        BOOKING_ENTITIES.add(bookingDto2);
-////        bookingDaoImpl.saveAllToFile();
-////        System.out.println(bookingDaoImpl.getAllBookings());
-//        BookingDto bookingDto=new BookingDto("Test",22L,3L,123L,LocalDate.now());
-//        BookingDto bookingDto1=new BookingDto("Test",12L,3L,123L,LocalDate.now());
-//        BookingDto bookingDto2=new BookingDto("Test",32L,3L,123L,LocalDate.now());
-//
-////        bookingController.saveAllToFile(bookingDto);
-////        bookingController.saveAllToFile(bookingDto1);
-////        bookingController.saveAllToFile(bookingDto2);
-//        bookingController.saveAllToFile(bookingDto);
-//     //   System.out.println(bookingDaoImpl.getAllBookings());
-//        System.out.println( bookingController.cancelBookingById(22L));
 //        System.out.println( bookingController.getAllBookings());
+//        System.out.println( bookingController.cancelBookingById(88L));
+//        System.out.println(bookingController.getAllBookings());
+//      //  System.out.println(bookingController.getBookingsByFlightId(9L));
+//       // System.out.println(bookingController.getBookingsByFlightId(49L));
+//        System.out.println(bookingController.getBookingsByFlightId(9L));
+//     //   System.out.println(bookingController.getBookingById(89L));
+//        System.out.println(bookingController.getBookingById(89L));
+//
+//
+//
+//
+//
 //
 //
 //
 //
 //    }
 //}
-
-package az.edu.turing.step_project;
-
-public class Application {
-    public static void main(String[] args) {
-        boolean flag = false;
-        while (!flag) {
-            System.out.println("S");
-            flag = true;
-        }
-    }
-}
-
+//
+//
+//

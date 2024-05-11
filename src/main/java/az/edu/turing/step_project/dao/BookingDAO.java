@@ -11,10 +11,11 @@ public interface BookingDAO<T> {
     boolean saveBooking(Collection<T> t) throws IOException;
     Optional<T> getBookingById(Long bookingId) throws IOException;
     public List<BookingEntity> getAllBookings() throws IOException;
-    Optional<T>getBookingsByPassengerName(String name) throws IOException;
+
+    Optional<T> getBookingsByFlightId(Long flightId) throws IOException;
 
     boolean cancelBookingById(Long bookingId) throws IOException;
-    Optional<T>cancelBookingByName(String bookingName) throws IOException;
+
     public void saveAllToFile(BookingEntity bookingEntity);
 
 

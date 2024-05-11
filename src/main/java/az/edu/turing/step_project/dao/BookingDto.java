@@ -3,28 +3,60 @@ package az.edu.turing.step_project.dao;
 import java.time.LocalDate;
 
 public class BookingDto {
-    public String passengerName;
-    public Long bookingId;
-    public Long flightId;
-    public Long NUM_TICKERS;
-    public LocalDate CreadationDate;
+    private static final Long serialUID = 1L;
+    private String passengerName;
+    private Long bookingId;
+    private Long flightId;
+    private LocalDate CreadationDate;
 
-    public BookingDto(String passengerName, Long bookingId, Long flightId, Long NUM_TICKERS, LocalDate creadationDate) {
+    public BookingDto(String passengerName, Long bookingId, Long flightId, LocalDate creadationDate) {
         this.passengerName = passengerName;
         this.bookingId = bookingId;
         this.flightId = flightId;
-        this.NUM_TICKERS = NUM_TICKERS;
+        CreadationDate = creadationDate;
+    }
+
+
+    public String getPassengerName() {
+        return passengerName;
+    }
+
+    public void setPassengerName(String passengerName) {
+        this.passengerName = passengerName;
+    }
+
+    public Long getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(Long bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public Long getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(Long flightId) {
+        this.flightId = flightId;
+    }
+
+    public LocalDate getCreadationDate() {
+        return CreadationDate;
+    }
+
+    public void setCreadationDate(LocalDate creadationDate) {
         CreadationDate = creadationDate;
     }
 
     @Override
     public String toString() {
-        return "BookingDto{" +
+        return "BookingEntity{" +
                 "passengerName='" + passengerName + '\'' +
                 ", bookingId=" + bookingId +
                 ", flightId=" + flightId +
-                ", NUM_TICKERS=" + NUM_TICKERS +
                 ", CreadationDate=" + CreadationDate +
                 '}';
     }
+
 }
