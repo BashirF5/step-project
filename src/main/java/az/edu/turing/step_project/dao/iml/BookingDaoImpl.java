@@ -18,35 +18,6 @@ public class BookingDaoImpl implements BookingDAO<BookingEntity> {
         this.mapper = objectMapper;
     }
 
-
-    //    public void saveAllToFile(BookingEntity bookingEntity) {
-//        BOOKING_ENTITIES.add(bookingEntity);
-//        try {
-//            FileWriter fileWriter = new FileWriter(FILE_PATH_RESOURCES,true);
-//            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-//            mapper.writeValue(bufferedWriter, BOOKING_ENTITIES);
-//            bufferedWriter.close();
-//        } catch (Exception e) {
-//            System.out.println("There is a problem");
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public boolean saveBooking(Collection<BookingEntity> bookings) throws IOException {
-//        BOOKING_ENTITIES.addAll(bookings);
-//        try {
-//            FileWriter fileWriter = new FileWriter(FILE_PATH_RESOURCES,true);
-//            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-//            mapper.writeValue(bufferedWriter, BOOKING_ENTITIES);
-//            bufferedWriter.close();
-//            return true;
-//        } catch (Exception e) {
-//            System.out.println("There is a problem");
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
-//
     public void saveAllToFile(BookingEntity bookingEntity) {
         BOOKING_ENTITIES.add(bookingEntity);
         try {
@@ -115,7 +86,6 @@ public class BookingDaoImpl implements BookingDAO<BookingEntity> {
             saveBooking(allBookings);
             return true;
         }
-//        return bookingToDelete;
         return false;
     }
 

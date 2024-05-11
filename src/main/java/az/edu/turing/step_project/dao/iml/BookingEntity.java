@@ -18,15 +18,9 @@ public class BookingEntity implements Serializable {
         this.passengerName = passengerName;
         this.bookingId = bookingId;
         this.flightId = flightId;
-        creadationDate = creadationDate;
+        this.creadationDate=creadationDate;
     }
 
-//    public BookingEntity(String passengerName, Long bookingId, Long flightId) {
-//        this.passengerName = passengerName;
-//        this.bookingId = bookingId;
-//        this.flightId = flightId;
-//
-//    }
 
     public String getPassengerName() {
         return passengerName;

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 
 public class BookingServiceImp implements BookingService {
@@ -20,20 +20,6 @@ public class BookingServiceImp implements BookingService {
         this.daoBooking = daoBooking;
     }
 
-//    @Override
-//    public void saveBooking(Collection<BookingDto> bookingDtos) throws IOException {
-//        daoBooking.saveBooking(bookingDtos.stream().
-//                map(bookingDto -> new BookingEntity(bookingDto.getPassengerName(),bookingDto.getBookingId(),bookingDto.getFlightId()))
-//                .collect(Collectors.toList()));
-//    }
-
-    //    @Override
-//    public List<BookingDto> getAllBookings() throws IOException {
-//       return daoBooking.getAllBookings().stream().
-//               map(bookingEntity -> new BookingDto(bookingEntity.getPassengerName(), bookingEntity.getBookingId(), bookingEntity.getFlightId()))
-//               .collect(Collectors.toList());
-//
-//    }
     @Override
     public List<BookingEntity> getAllBookings() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
