@@ -12,12 +12,21 @@ public class BookingEntity implements Serializable {
     private Long NUM_TICKERS;
     private LocalDate CreadationDate;
 
+    public BookingEntity() {
+    }
+
     public BookingEntity(String passengerName, Long bookingId, Long flightId, Long NUM_TICKERS, LocalDate creadationDate) {
         this.passengerName = passengerName;
         this.bookingId = bookingId;
         this.flightId = flightId;
         this.NUM_TICKERS = NUM_TICKERS;
         CreadationDate = creadationDate;
+    }
+    public BookingEntity(String passengerName, Long bookingId, Long flightId) {
+        this.passengerName = passengerName;
+        this.bookingId = bookingId;
+        this.flightId = flightId;
+
     }
 
     public String getPassengerName() {
@@ -70,4 +79,5 @@ public class BookingEntity implements Serializable {
                 ", CreadationDate=" + CreadationDate +
                 '}';
     }
+
 }

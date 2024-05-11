@@ -35,16 +35,15 @@ public class BookingController {
     }
 
 
+
     public BookingDto createBooking(BookingDto bookingDto) throws IOException {
-        final Long bookingId = bookingDto.bookingId;
-        if (bookingId == null && bookingId != 6) {
-            throw new RuntimeException("Not valid BookingId,please check again! -->" + bookingDto);
+        if (bookingDto.bookingId == null || bookingDto.bookingId < 1) {
+            throw new BookingException("Invalid booking ID. Please provide a positive value.");
         }
         if (bookingDto.CreadationDate.isBefore(LocalDate.now())) {
-            throw new BookingException("Creating a book cannot be past!");
+            throw new BookingException("Creation date cannot be in the past.");
         }
         return bookingService.createBooking(bookingDto);
-
     }
 
     public List<BookingEntity> getAllBookings() throws IOException {
@@ -72,13 +71,12 @@ public class BookingController {
         return bookings;
     }
 
-    public Optional<BookingEntity> cancelBookingById(Long bookingId) throws IOException {
-        Optional<BookingEntity> cancelBooking = bookingService.cancelBookingById(bookingId);
+    public boolean cancelBookingById(Long bookingId) throws IOException {
         if (bookingId > 0) {
-            if (cancelBooking.isPresent()) {
-                return cancelBooking;
+            if (bookingService.cancelBookingById(bookingId)) {
+                return true;
             } else {
-                return Optional.empty();
+                return false;
             }
         } else {
             throw new BookingException("BookingId cannot be negative");
@@ -92,6 +90,9 @@ public class BookingController {
         } else {
             return Optional.empty();
         }
+    }
+    public void saveAllToFile(BookingDto bookingDto){
+        bookingService.saveAllToFile(bookingDto);
     }
 
 }
