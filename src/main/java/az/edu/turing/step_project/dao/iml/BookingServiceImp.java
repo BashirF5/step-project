@@ -1,7 +1,8 @@
 package az.edu.turing.step_project.dao.iml;
 
 
-import az.edu.turing.step_project.dao.BookingDto;
+import az.edu.turing.step_project.model.dto.BookingDto;
+import az.edu.turing.step_project.model.entities.BookingEntity;
 import az.edu.turing.step_project.service.BookingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
