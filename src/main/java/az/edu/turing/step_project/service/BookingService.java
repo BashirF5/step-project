@@ -17,5 +17,4 @@ public interface BookingService {
      boolean cancelBookingById(Long bookingId) throws IOException;
 
     public void saveAllToFile(BookingDto bookingDto);
-
 }
