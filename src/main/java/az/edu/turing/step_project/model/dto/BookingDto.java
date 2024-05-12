@@ -1,26 +1,23 @@
-package az.edu.turing.step_project.dao.iml;
+package az.edu.turing.step_project.model.dto;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-public class BookingEntity implements Serializable {
-
+public class BookingDto {
     private static final Long serialUID = 1L;
     private String passengerName;
     private Long bookingId;
     private Long flightId;
-      private String destination;
-    private LocalDate creadationDate;
+    private String destination;
+    private LocalDate CreadationDate;
 
-    public BookingEntity() {
-    }
 
-    public BookingEntity(String passengerName, Long bookingId, Long flightId, String destination, LocalDate creadationDate) {
+    public BookingDto(String passengerName, Long bookingId, Long flightId, String destination, LocalDate creadationDate) {
         this.passengerName = passengerName;
         this.bookingId = bookingId;
         this.flightId = flightId;
         this.destination = destination;
-        this.creadationDate = creadationDate;
+        CreadationDate = creadationDate;
+        
     }
 
     public String getDestination() {
@@ -56,11 +53,11 @@ public class BookingEntity implements Serializable {
     }
 
     public LocalDate getCreadationDate() {
-        return creadationDate;
+        return CreadationDate;
     }
 
     public void setCreadationDate(LocalDate creadationDate) {
-        this.creadationDate = creadationDate;
+        CreadationDate = creadationDate;
     }
 
     @Override
@@ -69,7 +66,8 @@ public class BookingEntity implements Serializable {
                 "passengerName='" + passengerName + '\'' +
                 ", bookingId=" + bookingId +
                 ", flightId=" + flightId +
-                ", creadationDate=" + creadationDate +
+                ", CreadationDate=" + CreadationDate +
                 '}';
     }
+
 }
