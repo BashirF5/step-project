@@ -2,10 +2,11 @@
 package az.edu.turing.step_project;
 
 import az.edu.turing.step_project.controller.BookingController;
-import az.edu.turing.step_project.dao.BookingDto;
+//import az.edu.turing.step_project.dao.BookingDto;
 import az.edu.turing.step_project.dao.iml.BookingDaoImpl;
-import az.edu.turing.step_project.dao.iml.BookingEntity;
+//import az.edu.turing.step_project.dao.iml.BookingEntity;
 import az.edu.turing.step_project.dao.iml.BookingServiceImp;
+import az.edu.turing.step_project.model.dto.BookingDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -22,17 +23,17 @@ public class Application {
 //       bookingController.createBooking(bookingDto);
         BookingDto bookingDto1 = new BookingDto("A", 88L, 99L,"Norway", LocalDate.of(2024, 6, 4));
         bookingController.createBooking(bookingDto1);
-        BookingDto bookingDto2 = new BookingDto("A", 89L, 49L,"Baku", LocalDate.now());
+        BookingDto bookingDto2 = new BookingDto("A", 89L, 49L,"Baku", LocalDate.of(2024,12,12));
         bookingController.createBooking(bookingDto2);
 
         System.out.println(bookingController.getAllBookings());
-        System.out.println(bookingController.cancelBookingById(88L));
-        System.out.println(bookingController.getAllBookings());
-        //  System.out.println(bookingController.getBookingsByFlightId(9L));
-        // System.out.println(bookingController.getBookingsByFlightId(49L));
-        System.out.println(bookingController.getBookingsByFlightId(9L));
-        //   System.out.println(bookingController.getBookingById(89L));
-        System.out.println(bookingController.getBookingById(89L));
+//        System.out.println(bookingController.cancelBookingById(88L));
+//        System.out.println(bookingController.getAllBookings());
+//        //  System.out.println(bookingController.getBookingsByFlightId(9L));
+//        // System.out.println(bookingController.getBookingsByFlightId(49L));
+//        System.out.println(bookingController.getBookingsByFlightId(9L));
+   //System.out.println(bookingController.getBookingById(89L));
+//        System.out.println(bookingController.getBookingById(89L));
 
 
     }
