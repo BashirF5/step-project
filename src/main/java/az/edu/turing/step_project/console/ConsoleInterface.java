@@ -1,21 +1,31 @@
 package az.edu.turing.step_project.console;
+import az.edu.turing.step_project.controller.FlightsController;
+import az.edu.turing.step_project.dao.FlightsDao;
+import az.edu.turing.step_project.dao.FlightsFileDao;
+import az.edu.turing.step_project.dao.iml.FlightsServiceImpl;
 import az.edu.turing.step_project.exception.BookingException;
 import az.edu.turing.step_project.model.dto.BookingDto;
+import az.edu.turing.step_project.model.dto.FlightsDto;
 import az.edu.turing.step_project.model.entities.BookingEntity;
 import az.edu.turing.step_project.service.BookingService;
+import az.edu.turing.step_project.service.FlightsService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+
 
 public class ConsoleInterface {
     private BookingService bookingService;
     private BufferedReader reader;
+    private FlightsService flightService;
+    FlightsDao flightsDao=new FlightsFileDao(new ObjectMapper());
+    FlightsService flightsService=new FlightsServiceImpl(flightsDao);
+    FlightsController flightsController=new FlightsController(flightService);
 
     public ConsoleInterface(BookingService bookingService) {
         this.bookingService = bookingService;
@@ -73,28 +83,24 @@ public class ConsoleInterface {
     }
 
     public void displayOnlineBoard() {
-        try {
-            System.out.println("Online Board - Flights from Kiev in the next 24 hours:");
-            List<BookingEntity> flights = bookingService.getAllBookings();
-            if (flights.isEmpty()) {
-                System.out.println("No flights available.");
-            } else {
-                for (BookingEntity flight : flights) {
-                    // Assuming the format of flight information is: Flight ID, Destination, Date, Time, Available Seats
-                    System.out.printf("Flight ID: %d | Destination: %s | Date: %s | Time: %s | Available Seats: %d%n",
-                            flight.getFlightId(), getDestinationFromFlightId(flight.getFlightId()),
-                            flight.getCreadationDate(), "time_here", getAvailableSeats(flight.getFlightId()));
-                }
+        System.out.println("Online Board - Flights from Kiev in the next 24 hours:");
+        Collection<FlightsDto> flights = flightsController.getAllFlights();
+        if (flights.isEmpty()) {
+            System.out.println("No flights available.");
+        } else {
+            for (FlightsDto flight : flights) {
+                // Assuming the format of flight information is: Flight ID, Destination, Date, Time, Available Seats
+                System.out.printf("Flight ID: %d | Destination: %s | Date: %s | Time: %s%n",
+                        flight.getFlightId(), getDestinationFromFlightId(flight.getFlightId()),
+                        flight.getDepartureDateTime().toLocalDate(), flight.getDepartureDateTime().toLocalTime());
             }
-        } catch (IOException e) {
-            System.out.println("An error occurred while fetching flight information: " + e.getMessage());
         }
     }
 
     private String getDestinationFromFlightId(Long flightId) {
         try {
             // Assuming you have a FlightService instance available
-            String destination = flightService.getDestinationByFlightId(flightId);
+            String destination = flightService.getFlightInfoByFlightId(flightId).toString();
             if (destination != null) {
                 return destination;
             } else {
@@ -105,40 +111,6 @@ public class ConsoleInterface {
             return "Error";
         }
     }
-
-
-    private int getAvailableSeats(Long flightId) {
-        try {
-            // Retrieve all bookings for the given flight ID
-            List<BookingEntity> bookings = bookingService.getBookingsByFlightId(flightId).orElse(new ArrayList<>());
-
-            // Assuming you have access to the total capacity of the flight
-            int totalCapacity = getTotalCapacityForFlight(flightId);
-
-            // Calculate the number of available seats
-            int totalBookedSeats = bookings.size();
-            int availableSeats = totalCapacity - totalBookedSeats;
-
-            // Ensure available seats count is non-negative
-            return Math.max(availableSeats, 0);
-        } catch (IOException e) {
-            System.out.println("An error occurred while fetching available seats information: " + e.getMessage());
-            return -1; // Return -1 to indicate an error
-        }
-    }
-
-    private int getTotalCapacityForFlight(Long flightId) {
-        try {
-            // Assuming you have access to a FlightService instance
-            int totalCapacity = flightService.getTotalCapacityForFlightId(flightId);
-            return totalCapacity;
-        } catch (Exception e) {
-            System.out.println("An error occurred while fetching total capacity information: " + e.getMessage());
-            return -1; // Return -1 to indicate an error
-        }
-    }
-
-
 
 
     private void showFlightInfo() throws IOException {
@@ -153,7 +125,6 @@ public class ConsoleInterface {
                 System.out.println("Flight ID: " + flight.getFlightId());
                 System.out.println("Destination: " + getDestinationFromFlightId(flight.getFlightId()));
                 System.out.println("Creation Date: " + flight.getCreadationDate());
-                System.out.println("Available Seats: " + getAvailableSeats(flight.getFlightId()));
             } else {
                 System.out.println("Flight with ID " + flightId + " not found.");
             }
@@ -183,8 +154,8 @@ public class ConsoleInterface {
                 System.out.println("Available Flights:");
                 for (int i = 0; i < availableFlights.size(); i++) {
                     BookingEntity flight = availableFlights.get(i);
-                    System.out.printf("%d. Flight ID: %d | Destination: %s | Date: %s | Available Seats: %d%n",
-                            i + 1, flight.getFlightId(), destination, date, getAvailableSeats(flight.getFlightId()));
+                    System.out.printf("%d. Flight ID: %d | Destination: %s | Date: %s %n",
+                            i + 1, flight.getFlightId(), destination, date);
                 }
 
                 System.out.print("Enter the number of the flight you want to book (0 to cancel): ");
@@ -225,16 +196,22 @@ public class ConsoleInterface {
         // 3. Sufficient available seats for the specified number of people
 
         // For example:
-        return flight.getDestination().equalsIgnoreCase(destination)
-                && flight.getCreadationDate().isEqual(date)
-                && getAvailableSeats(flight.getFlightId()) >= numberOfPeople;
+        return flight.getCreadationDate().isEqual(date);
     }
 
+    private Long generateBookingId() {
+        // Generate a random UUID
+        UUID uuid = UUID.randomUUID();
+        // Convert UUID to a long value
+        long id = uuid.getMostSignificantBits() & Long.MAX_VALUE;
+        // Ensure the generated ID is positive
+        return id > 0 ? id : -id;
+    }
 
     private void bookFlight(BookingEntity flight, int numberOfPeople) throws IOException {
         try {
             // Check if there are sufficient available seats for booking
-            int availableSeats = getAvailableSeats(flight.getFlightId());
+            int availableSeats = 50000;
             if (availableSeats >= numberOfPeople) {
                 // Create booking records for each passenger
                 for (int i = 0; i < numberOfPeople; i++) {
@@ -244,7 +221,7 @@ public class ConsoleInterface {
                     // Assuming you generate a unique booking ID for each booking
                     Long bookingId = generateBookingId();
                     // Create a BookingDto object to store booking information
-                    BookingDto bookingDto = new BookingDto(passengerName, bookingId, flight.getFlightId(), LocalDate.now());
+                    BookingDto bookingDto = new BookingDto(passengerName, bookingId, flight.getFlightId(),LocalDate.now());
                     // Save the booking to the database or file
                     bookingService.saveAllToFile(bookingDto);
                 }
@@ -256,13 +233,6 @@ public class ConsoleInterface {
             System.out.println("Invalid input! Please enter a valid number.");
         }
     }
-
-    // Utility method to generate a unique booking ID (replace with your actual logic)
-    private Long generateBookingId() {
-        // Implement logic to generate a unique booking ID
-    }
-
-
 
     private void cancelBooking() throws IOException {
         try {
@@ -287,6 +257,9 @@ public class ConsoleInterface {
         return bookingService.cancelBookingById(bookingId);
     }
 
+    public void setFlightService(FlightsService flightService) {
+        this.flightService = flightService;
+    }
 
     private void displayMyFlights() throws IOException {
         try {

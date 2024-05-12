@@ -33,9 +33,9 @@ public class BookingDaoImplTest {
         BookingDaoImpl bookingDaoImpl = new BookingDaoImpl(new ObjectMapper().registerModule(new JavaTimeModule()));
         BookingServiceImp bookingServiceImp = new BookingServiceImp(bookingDaoImpl);
         BookingController bookingController = new BookingController(bookingServiceImp);
-        BookingDto bookingDto1 = new BookingDto("A", 88L, 99L,"Norway", LocalDate.of(2024, 6, 4));
+        BookingDto bookingDto1 = new BookingDto("A", 88L, 99L, LocalDate.of(2024, 6, 4));
         bookingController.createBooking(bookingDto1);
-        BookingDto bookingDto2 = new BookingDto("A", 89L, 49L,"Baku", LocalDate.now());
+        BookingDto bookingDto2 = new BookingDto("A", 89L, 49L, LocalDate.now());
         bookingController.createBooking(bookingDto2);
     }
 
@@ -46,7 +46,7 @@ public class BookingDaoImplTest {
         BookingDaoImpl bookingDaoImpl = new BookingDaoImpl(new ObjectMapper().registerModule(new JavaTimeModule()));
         BookingServiceImp bookingServiceImp = new BookingServiceImp(bookingDaoImpl);
         BookingController bookingController = new BookingController(bookingServiceImp);
-        BookingDto bookingDto1 = new BookingDto("A", 88L, 99L, "Norway", LocalDate.of(2024, 6, 4));
+        BookingDto bookingDto1 = new BookingDto("A", 88L, 99L,  LocalDate.of(2024, 6, 4));
         List<BookingEntity> actualBookings = bookingController.getAllBookings();
         assertEquals(1, actualBookings.size());
         BookingEntity booking = actualBookings.get(0);
@@ -62,8 +62,8 @@ public class BookingDaoImplTest {
         BookingDaoImpl bookingDaoImpl = new BookingDaoImpl(new ObjectMapper().registerModule(new JavaTimeModule()));
         BookingServiceImp bookingServiceImp = new BookingServiceImp(bookingDaoImpl);
         BookingController bookingController = new BookingController(bookingServiceImp);
-        BookingDto bookingDto1 = new BookingDto("A", 88L, 99L, "Norway", LocalDate.of(2024, 6, 4));
-        BookingDto bookingDto2 = new BookingDto("A", 89L, 49L, "Baku", LocalDate.of(2024, 12, 12));
+        BookingDto bookingDto1 = new BookingDto("A", 88L, 99L,  LocalDate.of(2024, 6, 4));
+        BookingDto bookingDto2 = new BookingDto("A", 89L, 49L,  LocalDate.of(2024, 12, 12));
         bookingController.createBooking(bookingDto1);
         bookingController.createBooking(bookingDto2);
         Optional<BookingEntity> optionalBooking = bookingController.getBookingById(89L);
@@ -80,8 +80,8 @@ public class BookingDaoImplTest {
         BookingDaoImpl bookingDaoImpl = new BookingDaoImpl(new ObjectMapper().registerModule(new JavaTimeModule()));
         BookingServiceImp bookingServiceImp = new BookingServiceImp(bookingDaoImpl);
         BookingController bookingController = new BookingController(bookingServiceImp);
-        BookingDto bookingDto1 = new BookingDto("A", 88L, 99L, "Norway", LocalDate.of(2024, 6, 4));
-        BookingDto bookingDto2 = new BookingDto("A", 89L, 49L, "Baku", LocalDate.of(2024, 12, 12));
+        BookingDto bookingDto1 = new BookingDto("A", 88L, 99L,  LocalDate.of(2024, 6, 4));
+        BookingDto bookingDto2 = new BookingDto("A", 89L, 49L,  LocalDate.of(2024, 12, 12));
         bookingController.createBooking(bookingDto1);
         bookingController.createBooking(bookingDto2);
         Optional<BookingEntity> optionalBooking = bookingController.getBookingsByFlightId(99L);
@@ -98,8 +98,8 @@ public class BookingDaoImplTest {
         BookingDaoImpl bookingDaoImpl = new BookingDaoImpl(new ObjectMapper().registerModule(new JavaTimeModule()));
         BookingServiceImp bookingServiceImp = new BookingServiceImp(bookingDaoImpl);
         BookingController bookingController = new BookingController(bookingServiceImp);
-        BookingDto bookingDto1 = new BookingDto("A", 88L, 99L, "Norway", LocalDate.of(2024, 6, 4));
-        BookingDto bookingDto2 = new BookingDto("A", 89L, 49L, "Baku", LocalDate.of(2024, 12, 12));
+        BookingDto bookingDto1 = new BookingDto("A", 88L, 99L,  LocalDate.of(2024, 6, 4));
+        BookingDto bookingDto2 = new BookingDto("A", 89L, 49L,  LocalDate.of(2024, 12, 12));
         bookingController.createBooking(bookingDto1);
         bookingController.createBooking(bookingDto2);
         boolean optionalBooking = bookingController.cancelBookingById(88L);
