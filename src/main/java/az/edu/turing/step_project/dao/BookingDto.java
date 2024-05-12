@@ -7,15 +7,26 @@ public class BookingDto {
     private String passengerName;
     private Long bookingId;
     private Long flightId;
+    private String destination;
     private LocalDate CreadationDate;
 
-    public BookingDto(String passengerName, Long bookingId, Long flightId, LocalDate creadationDate) {
+
+    public BookingDto(String passengerName, Long bookingId, Long flightId, String destination, LocalDate creadationDate) {
         this.passengerName = passengerName;
         this.bookingId = bookingId;
         this.flightId = flightId;
+        this.destination = destination;
         CreadationDate = creadationDate;
+        
     }
 
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
 
     public String getPassengerName() {
         return passengerName;
