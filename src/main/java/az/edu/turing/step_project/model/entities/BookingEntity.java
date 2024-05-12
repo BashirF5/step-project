@@ -27,9 +27,15 @@ public class BookingEntity implements Serializable {
         return destination;
     }
 
+    public BookingEntity(int i, String destination1, String date, String time, int i1) {
+
+    }
+
+
     public void setDestination(String destination) {
         this.destination = destination;
     }
+
 
     public String getPassengerName() {
         return passengerName;

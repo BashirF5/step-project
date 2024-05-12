@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class BookingController {
-    private final BookingService bookingService;
+    private static BookingService bookingService;
 
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
@@ -48,7 +48,7 @@ public class BookingController {
         }
     }
 
-    public boolean cancelBookingById(Long bookingId) throws IOException {
+    public static boolean cancelBookingById(Long bookingId) throws IOException {
         if (bookingId > 0) {
             if (bookingService.cancelBookingById(bookingId)) {
                 return true;
