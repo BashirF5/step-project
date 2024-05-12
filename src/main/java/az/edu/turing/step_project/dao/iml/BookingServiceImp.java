@@ -46,7 +46,7 @@ public class BookingServiceImp implements BookingService {
 
     @Override
     public void saveAllToFile(BookingDto bookingDto) {
-        BookingEntity booking = new BookingEntity(bookingDto.getPassengerName(), bookingDto.getBookingId(), bookingDto.getFlightId(),bookingDto.getDestination(), bookingDto.getCreadationDate());
+        BookingEntity booking = new BookingEntity(bookingDto.getPassengerName(), bookingDto.getBookingId(), bookingDto.getFlightId(), bookingDto.getCreadationDate());
         daoBooking.saveAllToFile(booking);
     }
 

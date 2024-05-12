@@ -9,32 +9,23 @@ public class BookingEntity implements Serializable {
     private String passengerName;
     private Long bookingId;
     private Long flightId;
-      private String destination;
     private LocalDate creadationDate;
 
     public BookingEntity() {
     }
 
-    public BookingEntity(String passengerName, Long bookingId, Long flightId, String destination, LocalDate creadationDate) {
+    public BookingEntity(String passengerName, Long bookingId, Long flightId, LocalDate creadationDate) {
         this.passengerName = passengerName;
         this.bookingId = bookingId;
         this.flightId = flightId;
-        this.destination = destination;
         this.creadationDate = creadationDate;
     }
 
-    public String getDestination() {
-        return destination;
-    }
 
     public BookingEntity(int i, String destination1, String date, String time, int i1) {
 
     }
 
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
 
 
     public String getPassengerName() {
