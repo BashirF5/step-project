@@ -8,8 +8,8 @@ import java.io.*;
 import java.util.*;
 
 public class BookingDaoImpl implements BookingDAO<BookingEntity> {
-//    private static final String FILE_PATH = "C:\\Users\\aydan\\IdeaProjects\\step-project\\src\\main\\java\\az\\edu\\turing\\step_project\\resources\\";
-    private static final String FILE_PATH = "C:\\Users\\Admin\\IdeaProjects\\turing\\turing-projects\\step-project2\\src\\main\\java\\az\\edu\\turing\\step_project\\resources\\";
+  private static final String FILE_PATH = "C:\\Users\\aydan\\IdeaProjects\\step-project\\src\\main\\java\\az\\edu\\turing\\step_project\\resources\\";
+  //  private static final String FILE_PATH = "C:\\Users\\Admin\\IdeaProjects\\turing\\turing-projects\\step-project2\\src\\main\\java\\az\\edu\\turing\\step_project\\resources\\";
     private static final String FILE_PATH_RESOURCES = FILE_PATH.concat("bookingInfo.json");
     //  private static final String FILE_PATH_RESOURCES = FILE_PATH.concat("bookingInfo.txt");
     private static final File file = new File(FILE_PATH_RESOURCES);

@@ -1,7 +1,7 @@
 package az.edu.turing.step_project.controller;
 
-import az.edu.turing.step_project.dao.BookingDto;
-import az.edu.turing.step_project.dao.iml.BookingEntity;
+import az.edu.turing.step_project.model.dto.BookingDto;
+import az.edu.turing.step_project.model.entities.BookingEntity;
 import az.edu.turing.step_project.service.BookingService;
 import az.edu.turing.step_project.exception.BookingException;
 
